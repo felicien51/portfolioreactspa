@@ -1,7 +1,8 @@
 # Portfolio Showcase (JSX)
 
 A beginner React SPA for showcasing creative projects.
-Project link: portfolioreactspaa.vercel.app
+
+ portfolioreactspaa.vercel.app
 
 ## Setup
 
