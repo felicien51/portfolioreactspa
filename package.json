@@ -25,3 +25,7 @@
     "development": ["last 1 chrome version", "last 1 firefox version"]
   }
 }
+"scripts": {
+  "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+  "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start"
+}
