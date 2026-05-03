@@ -2,7 +2,7 @@
 
 A beginner React SPA for showcasing creative projects.
 
- portfolioreactspaa.vercel.app
+ PROJECT LINK : https://portfolioreactspaa.vercel.app/
 
 ## Setup
 
