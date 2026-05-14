@@ -4,16 +4,6 @@ A beginner React SPA for showcasing creative projects.
 
  PROJECT LINK : https://portfolioreactspaa.vercel.app/
 
-## Setup
-
-```bash
-npm install
-npm start
-```
-
-Opens at http://localhost:3000
-
-## Tests
 
 ```bash
 npm test
