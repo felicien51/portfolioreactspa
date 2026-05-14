@@ -2,7 +2,7 @@
 
 A single-page application built with React and Vite for showcasing creative projects. Features real-time search, category filtering, project management, and a fully responsive layout.
 
-**Live Demo:** https://portfolioreactspaa.vercel.app/
+**Live Demo:** https://portfolioreactspaaa.vercel.app/
 
 ---
 
