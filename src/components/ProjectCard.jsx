@@ -1,9 +1,7 @@
 import React from 'react';
 import './ProjectCard.css';
 
-function ProjectCard(props) {
-  var project = props.project;
-
+function ProjectCard({ project, onDelete }) {
   return (
     <div className="card">
       <span className="badge">{project.category}</span>
@@ -21,6 +19,13 @@ function ProjectCard(props) {
             View Project →
           </a>
         )}
+        <button
+          className="btn-delete"
+          onClick={function() { onDelete(project.id); }}
+          aria-label={'Delete ' + project.title}
+        >
+          Delete
+        </button>
       </div>
     </div>
   );

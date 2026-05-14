@@ -2,29 +2,13 @@ import React, { useState } from 'react';
 import './AddProjectForm.css';
 
 function AddProjectForm(props) {
-  var titleState = useState('');
-  var title = titleState[0];
-  var setTitle = titleState[1];
-
-  var descState = useState('');
-  var description = descState[0];
-  var setDescription = descState[1];
-
-  var catState = useState('');
-  var category = catState[0];
-  var setCategory = catState[1];
-
-  var yearState = useState('2025');
-  var year = yearState[0];
-  var setYear = yearState[1];
-
-  var linkState = useState('');
-  var link = linkState[0];
-  var setLink = linkState[1];
-
-  var errorState = useState('');
-  var error = errorState[0];
-  var setError = errorState[1];
+ 
+const [title, setTitle]           = useState('')
+const [description, setDescription] = useState('')
+const [category, setCategory]     = useState('')
+const [year, setYear]             = useState('2025')
+const [link, setLink]             = useState('')
+const [error, setError]           = useState('')
 
   function handleSubmit(e) {
     e.preventDefault();

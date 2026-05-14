@@ -1,0 +1,28 @@
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.filter-pill {
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #ccc;
+  background: white;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+  border-color: #0f0f0f;
+  color: #0f0f0f;
+}
+
+.filter-pill.active {
+  background: #0f0f0f;
+  color: white;
+  border-color: #0f0f0f;
+}

@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Navbar from './components/Navbar';
+import Hero from './components/Hero';
 import SearchBar from './components/SearchBar';
+import FilterBar from './components/FilterBar';
 import ProjectList from './components/ProjectList';
 import AddProjectForm from './components/AddProjectForm';
+import Footer from './components/Footer';
 import './App.css';
 
 var initialProjects = [
@@ -41,26 +44,28 @@ var initialProjects = [
 ];
 
 function App() {
-  var projectState = useState(initialProjects);
-  var projects = projectState[0];
-  var setProjects = projectState[1];
+  const [projects, setProjects]       = useState(initialProjects);
+  const [searchText, setSearchText]   = useState('');
+  const [showForm, setShowForm]       = useState(false);
+  const [activeCategory, setCategory] = useState('All');
 
-  var searchState = useState('');
-  var searchText = searchState[0];
-  var setSearchText = searchState[1];
+  const categories = useMemo(() => {
+    const cats = [...new Set(projects.map(p => p.category))];
+    return ['All', ...cats];
+  }, [projects]);
 
-  var formState = useState(false);
-  var showForm = formState[0];
-  var setShowForm = formState[1];
-
-  var filteredProjects = projects.filter(function (project) {
-    var q = searchText.toLowerCase();
-    return (
-      project.title.toLowerCase().includes(q) ||
-      project.description.toLowerCase().includes(q) ||
-      project.category.toLowerCase().includes(q)
-    );
-  });
+  const filteredProjects = useMemo(() => {
+    const q = searchText.toLowerCase();
+    return projects.filter(project => {
+      const matchesSearch =
+        project.title.toLowerCase().includes(q) ||
+        project.description.toLowerCase().includes(q) ||
+        project.category.toLowerCase().includes(q);
+      const matchesCategory =
+        activeCategory === 'All' || project.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [projects, searchText, activeCategory]);
 
   function handleAddProject(newProject) {
     var projectWithId = {
@@ -75,17 +80,28 @@ function App() {
     setShowForm(false);
   }
 
+  function handleDeleteProject(id) {
+    setProjects(projects.filter(function(p) { return p.id !== id; }));
+  }
+
   return (
     <div className="app">
-      <Navbar onAddClick={function () { setShowForm(!showForm); }} />
+      <Navbar
+        onAddClick={function () { setShowForm(!showForm); }}
+        showForm={showForm}
+        projectCount={projects.length}
+      />
 
-      <div className="hero">
-        <h1>Creative Project Showcase</h1>
-        <p>Browse our work and add your own projects below.</p>
-      </div>
+      <Hero />
 
       <div className="container">
         <SearchBar searchText={searchText} onSearch={setSearchText} />
+
+        <FilterBar
+          categories={categories}
+          activeCategory={activeCategory}
+          onCategoryChange={setCategory}
+        />
 
         {showForm && (
           <AddProjectForm
@@ -96,8 +112,16 @@ function App() {
 
         <p className="result-count">{filteredProjects.length} project(s) found</p>
 
-        <ProjectList projects={filteredProjects} />
+        {(searchText || activeCategory !== 'All') && (
+          <button className="btn-clear" onClick={function() { setSearchText(''); setCategory('All'); }}>
+            Clear filters
+          </button>
+        )}
+
+        <ProjectList projects={filteredProjects} onDelete={handleDeleteProject} />
       </div>
+
+      <Footer />
     </div>
   );
 }
